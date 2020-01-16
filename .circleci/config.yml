@@ -27,8 +27,8 @@ workflows:
     jobs:
       - build
       - build_image: 
-         requires:
-           - build
+        requires:
+          - build
         filters:
           branches:
             only: master
