@@ -21,3 +21,14 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
+      - build_image: 
+         requires:
+           - build
+        filters:
+          branches:
+            only: master
