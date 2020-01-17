@@ -1,9 +1,18 @@
 require 'sinatra'
+require './models/post'
 
 get '/' do
-    'Hello world! 文言を追加 さらに追加'
+  @posts = Post.all
+  erb :index
 end
-# ヘルスチェック用の URL を追記 
+
+post '/posts' do
+  title = params[:title]
+  post = Post.new(title: title)
+  post.save
+  redirect '/', 303
+end
+
 get '/health_check' do
-    'ok'
+  'ok'
 end
